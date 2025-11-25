@@ -5,7 +5,7 @@ const g = 1;
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
-  x = width / 2;
+  x = width / 2;//ｘ・ｙで位置特定
   y = height / 2;
   vx = 0;
   vy = 0;
@@ -25,8 +25,20 @@ function draw(){
   rect(0, groundY, width, height - groundY);
 
   // BLANK[1] キャラクターの左右移動
+  y=groundY-size/2 //y=groundY どちらか不明のためメモ。（characterを地面上に）
+
+  if(keyIsDown(LEFT_ARROW)){ x -= 1; 
+    if(keyIsDown("A".charCodeAt(0))){ x-= 10; 
+    }
+  } 
+
+  if(keyIsDown(RIGHT_ARROW)){ x += 1;
+    if(keyIsDown("A".charCodeAt(0))){ x+= 10;
+    } 
+  } //要件１・２
 
   // BLANK[2] 重力とジャンプ
+
 
   // 速くなりすぎないように制限
   vx = constrain(vx, -20, 20);
@@ -40,3 +52,5 @@ function draw(){
   fill(0);
   ellipse(x, y, size, size);
 }
+
+//まだ2できてない
