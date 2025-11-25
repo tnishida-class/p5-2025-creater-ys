@@ -48,7 +48,18 @@ function draw(){
   // balls = balls.filter(insideCanvas);
 
   if(frameCount % 20 === 0) { // 20フレームごとに新しい的を追加する
-    // BLANK[1] 新しい的オブジェクトを作成して targets 配列に追加しよう
+  // BLANK[1] 新しい的オブジェクトを作成して targets 配列に追加しよう
+  const angle = random(TWO_PI); // ランダムな方向
+    const speed = random(1, 3);
+    const t = {
+      x: width / 2,
+      y: height / 2,
+      vx: cos(angle) * speed,
+      vy: sin(angle) * speed,
+      size: 10
+    };
+    targets.push(t);
+    
   }
 
   // ボールに当たった or 大きくなりすぎた的を配列から削除する
@@ -60,6 +71,11 @@ function draw(){
       for(let j = 0; j < balls.length; j++){ // すべてのボールと衝突判定
         let b = balls[j];
         // BLANK[2]
+        let d = dist(t.x, t.y, b.x, b.y);
+        if(d < (t.size + b.size) / 2){ // 当たった！
+          hit = true;
+          break;
+        }
       }
       if(!hit) activeTargets.push(t); // 衝突していなければ生き残る
     }
